@@ -1,6 +1,6 @@
-from utility import check_win
+from utility import check_win, WIN_CONDITIONS
 
-MAX_DEPTH = 5  # Avoids the risk of Stack Overflow, 5 balances performance and decisions (I think)
+MAX_DEPTH = 1  
 
 def HeuristicEvaluations(board, player, computer, WIN_CONDITIONS):
     score = 0
@@ -26,7 +26,7 @@ def MinimaxAlphaBeta(board, depth, alpha, beta, MaximisingPlayer, player, comput
         check_win(board, WIN_CONDITIONS, computer) or 
         check_win(board, WIN_CONDITIONS, player) or 
         all(board[col][0] != ' ' for col in range(7))):
-        return HeuristicEvaluations(board, player, computer)
+        return HeuristicEvaluations(board, player, computer, WIN_CONDITIONS)
     '''If any condition is met, the function will return a heuristic score'''
 
     if MaximisingPlayer:
@@ -77,7 +77,7 @@ def FindBestMove(board, player, computer):
             for row in reversed(range(6)):
                 if board[col][row] == ' ':
                     board[col][row] = computer
-                    score = MinimaxAlphaBeta(board, MAX_DEPTH, float('-inf'), float('inf'), False, player, computer)
+                    score = MinimaxAlphaBeta(board, MAX_DEPTH, float('-inf'), float('inf'), False, player, computer, WIN_CONDITIONS)
                     board[col][row] = ' '
                     
                     if score > best_score:
@@ -86,5 +86,3 @@ def FindBestMove(board, player, computer):
                         
     return best_col
                     
-                    
-    
