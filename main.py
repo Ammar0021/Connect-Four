@@ -100,11 +100,13 @@ def player_move(board, player):
             print(error)
 
 def computer_minimax_move(board, player, computer):
-    best_col = FindBestMove(board, player, computer, MAX_DEPTH)
+    best_col = FindBestMove(board, player, computer)
     for row in reversed(range(6)):
         if board[best_col][row] == ' ':
             board[best_col][row] = computer
-            print(Fore.LIGHTGREEN_EX + f"Computer placed disc in column {best_col + 1}")
+            disc_symbol = "🔴" if computer == RED_DISC else "🟡"
+            disc_color = Fore.RED if computer == RED_DISC else Fore.YELLOW
+            print(f"{disc_color}Computer placed disc ({disc_symbol}) in column {best_col + 1}")
             sleep(0.7)
             break
 
@@ -162,7 +164,7 @@ def game_loop(board, win_conditions, mode, player1=None, player2=None, player=No
     if mode == "multi":
         current_player = player1
     elif mode == "single":
-        current_player = player
+        current_player = player  # Start with the human player
 
     moves_counter = defaultdict(int)
     turn_counter = defaultdict(int)
@@ -174,16 +176,15 @@ def game_loop(board, win_conditions, mode, player1=None, player2=None, player=No
         print(random.choice(random_colour) + Style.BRIGHT + f"Turn {turn_counter['turn']}")
         print()
 
+        if check_win(board, win_conditions, current_player):
+            handle_win(board, mode, current_player, player1, player2, player, computer)
+            break
+
         if mode == "multi":
             current_player = handle_multi_player_turn(board, current_player, player1, player2)
         elif mode == "single":
             current_player = handle_single_player_turn(board, current_player, player, computer)
 
-        if check_win(board, win_conditions, current_player):
-            handle_win(board, mode, current_player, player1, player2, player, computer)
-            break
-
-        current_player = switch_player(mode, current_player, player1, player2, player, computer, moves_counter, board)
         moves_counter['total'] += 1
 
     if moves_counter['total'] == 42:
@@ -210,10 +211,10 @@ def handle_single_player_turn(board, current_player, player, computer):
         player_move(board, player)
     elif current_player == computer:
         sleep(0.3)
-        print("Computer's turn...")
+        print(Fore.RED + "(🔴) Computer's turn..." if computer == RED_DISC else Fore.YELLOW + "(🟡) Computer's turn...")
         sleep(0.6)
         computer_minimax_move(board, player, computer)
-    return player if current_player == computer else computer
+    return computer if current_player == player else player
 
 def handle_win(board, mode, current_player, player1, player2, player, computer):
     display_board(board)
@@ -318,52 +319,3 @@ def main():
 
 if __name__ == "__main__":
     main()
- 
-
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
