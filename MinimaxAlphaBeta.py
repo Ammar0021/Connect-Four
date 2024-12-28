@@ -1,9 +1,8 @@
 from main import *
 
 MAX_DEPTH = 5  # Avoids the risk of Stack Overflow, 5 balances performance and decisions (I think)
-win_conditions = winning_conditions()
 
-def HeuristicEvaluations(board, player, computer, win_conditions):
+def HeuristicEvaluations(board, player, computer, WIN_CONDITIONS):
     score = 0
     centre_col = 3
     
@@ -12,7 +11,7 @@ def HeuristicEvaluations(board, player, computer, win_conditions):
     score += centre_count * 3
     
     
-    for condition in win_conditions:
+    for condition in WIN_CONDITIONS:
         player_count = sum(1 for row, col in condition if board[col][row] == player)
         computer_count = sum(1 for row, col in condition if board[col][row] == computer)
         
@@ -22,12 +21,12 @@ def HeuristicEvaluations(board, player, computer, win_conditions):
             score += 10 ** computer_count  # Reward for computer, encourages winning moves for the computer, exponents used to HIGHLY Penalise or Reward
     return score
 
-def MinimaxAlphaBeta(board, depth, alpha, beta, MaximisingPlayer, player, computer, win_conditions):
+def MinimaxAlphaBeta(board, depth, alpha, beta, MaximisingPlayer, player, computer, WIN_CONDITIONS):
     if (depth == 0 or 
-        check_win(board, win_conditions, computer) or 
-        check_win(board, win_conditions, player) or 
+        check_win(board, WIN_CONDITIONS, computer) or 
+        check_win(board, WIN_CONDITIONS, player) or 
         all(board[col][0] != ' ' for col in range(7))):
-        return HeuristicEvaluations(board, player, computer, win_conditions)
+        return HeuristicEvaluations(board, player, computer)
     '''If any condition is met, the function will return a heuristic score'''
 
     if MaximisingPlayer:
@@ -38,7 +37,7 @@ def MinimaxAlphaBeta(board, depth, alpha, beta, MaximisingPlayer, player, comput
                     if board[col][row] == ' ': # Finds empty cell
                         board[col][row] = computer # Places disc in empty cell
                         
-                        eval = MinimaxAlphaBeta(board, depth-1, alpha, beta, False, player, computer, win_conditions) # Recursion
+                        eval = MinimaxAlphaBeta(board, depth-1, alpha, beta, False, player, computer, WIN_CONDITIONS) # Recursion
                         '''
                         - depth-1 makes algorithm reduce the depth each recursive call, allows to explore deeper
                         - alpha is best value that maximiser (computer) can currently guarantee
@@ -61,7 +60,7 @@ def MinimaxAlphaBeta(board, depth, alpha, beta, MaximisingPlayer, player, comput
                     if board[col][row] == ' ':
                         board[col][row] = player
                         
-                        eval = MinimaxAlphaBeta(board, depth-1, alpha, beta, True, player, computer, win_conditions)
+                        eval = MinimaxAlphaBeta(board, depth-1, alpha, beta, True, player, computer, WIN_CONDITIONS)
                         board[col][row] = ' '
                         MinEval = min(MinEval, eval)
                         beta = min(beta, eval)
@@ -78,7 +77,7 @@ def FindBestMove(board, player, computer):
             for row in reversed(range(6)):
                 if board[col][row] == ' ':
                     board[col][row] = computer
-                    score = MinimaxAlphaBeta(board, MAX_DEPTH, float('-inf'), float('inf'), False, player, computer, win_conditions)
+                    score = MinimaxAlphaBeta(board, MAX_DEPTH, float('-inf'), float('inf'), False, player, computer)
                     board[col][row] = ' '
                     
                     if score > best_score:
@@ -87,5 +86,4 @@ def FindBestMove(board, player, computer):
                         
     return best_col
                     
-                        
     
