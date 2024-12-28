@@ -16,6 +16,8 @@ __Reminders:__
 __Issues:__
 
 - Losses Counter not Updating
+- Sort out Max Depth
+- Win bugs, (possibly in check_win function)
 - ~~Index out of range error (idk why ffs)~~
 
 **Minimax:**
