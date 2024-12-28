@@ -7,6 +7,7 @@ from colorama import Fore, Style
 from collections import deque, defaultdict
 
 from MinimaxAlphaBeta import FindBestMove, MAX_DEPTH
+from utility import check_win, WIN_CONDITIONS
 
 colorama.init(autoreset=True)
 
@@ -77,34 +78,6 @@ def display_board(board):
         print(row_string)
         print(Fore.GREEN + "------------------------------" + Fore.RESET)
 
-def winning_conditions():
-    win_conditions = []
-
-    for row in range(6):
-        for col in range(4):
-            win_conditions.append([(row, col), (row, col + 1), (row, col + 2), (row, col + 3)])
-
-    for row in range(3):
-        for col in range(7):
-            win_conditions.append([(row, col), (row + 1, col), (row + 2, col), (row + 3, col)])
-
-    for row in range(3):
-        for col in range(4):
-            win_conditions.append([(row, col), (row + 1, col + 1), (row + 2, col + 2), (row + 3, col + 3)])
-
-    for row in range(3):
-        for col in range(3, 7):
-            win_conditions.append([(row, col), (row + 1, col - 1), (row + 2, col - 2), (row + 3, col - 3)])
-
-    return win_conditions
-
-WIN_CONDITIONS = winning_conditions()
-
-def check_win(board, win_conditions, player):
-    for condition in win_conditions:
-        if all(board[col][row] == player for row, col in condition):
-            return True
-    return False
 
 def player_move(board, player):
     while True:
@@ -345,7 +318,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
  
 
     
