@@ -1,4 +1,4 @@
-from main import *
+from utility import check_win
 
 MAX_DEPTH = 5  # Avoids the risk of Stack Overflow, 5 balances performance and decisions (I think)
 
@@ -85,5 +85,6 @@ def FindBestMove(board, player, computer):
                         best_col = col
                         
     return best_col
+                    
                     
     
