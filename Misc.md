@@ -15,13 +15,12 @@ __Reminders:__
 
 __Issues:__
 
-- <span style="color:red;">Losses Counter not Updating</span>
+- Losses Counter not Updating
 - Index out of range error (idk why ffs)
 
 **Minimax:**
 
-- Scrap def computer_asian()
-- revamp def computer hard mode
+- ~~Scrap def computer_asian()~~
 - Sort out Max Depth and Bonus Score
 - ~~Add priority for Centre~~
 - ~~Check for 2,3 in a row~~
