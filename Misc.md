@@ -16,7 +16,7 @@ __Reminders:__
 __Issues:__
 
 - Losses Counter not Updating
-- Index out of range error (idk why ffs)
+- ~~Index out of range error (idk why ffs)~~
 
 **Minimax:**
 
