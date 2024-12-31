@@ -11,13 +11,13 @@ __Reminders:__
 - ~~Update other function arguments~~
 - ~~Update main()~~
 - ~~Add score counter (learn lambda)~~
-- Add only 1 "Draws" for multiplayer
+
 
 __Issues:__
 
 - Losses Counter not Updating
-- Sort out Max Depth
-- Win bugs, (possibly in check_win function)
+- ~~Sort out Max Depth~~
+- ~~Win bugs, (possibly in check_win function)~~
 - ~~Index out of range error (idk why ffs)~~
 
 **Minimax:**
