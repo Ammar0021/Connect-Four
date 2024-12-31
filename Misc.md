@@ -11,11 +11,12 @@ __Reminders:__
 - ~~Update other function arguments~~
 - ~~Update main()~~
 - ~~Add score counter (learn lambda)~~
+- Add input for how much MAX_DEPTH
 
 
 __Issues:__
 
-- Losses Counter not Updating
+- Score Counter not updating (help)
 - ~~Sort out Max Depth~~
 - ~~Win bugs, (possibly in check_win function)~~
 - ~~Index out of range error (idk why ffs)~~
@@ -23,7 +24,7 @@ __Issues:__
 **Minimax:**
 
 - ~~Scrap def computer_asian()~~
-- Sort out Max Depth and Bonus Score
+- ~~Sort out Max Depth and Bonus Score~~
 - ~~Add priority for Centre~~
 - ~~Check for 2,3 in a row~~
 
