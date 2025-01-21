@@ -1,6 +1,7 @@
 from utility import check_win, WIN_CONDITIONS
 import time
 import hashlib
+from hashlib import sha1
 
 MAX_DEPTH = 5 # You can adjust this based on your needs
 
@@ -10,7 +11,7 @@ transposition_table = {}
 def board_hash(board):
     '''Creates a unique hashable representation of the board'''
     board_string = ''.join([''.join(col) for col in board])
-    return hashlib.sha1(board_string.encode()).hexdigest()
+    return sha1(board_string.encode()).hexdigest()
 
 def HeuristicEvaluations(board, player, computer, WIN_CONDITIONS):
     score = 0
